@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "gitCompany": "",
+    "baseName": "hermancards",
+    "packageName": "hu.szeged.u.ohsh",
+    "packageFolder": "hu/szeged/u/ohsh",
+    "serverPort": 8080,
+    "serviceDiscoveryType": false,
+    "authenticationType": "jwt",
+    "uaaBaseName": "../uaa",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "enableSwaggerCodegen": false,
+    "messageBroker": false,
+    "buildTool": "maven",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "enableTranslation": false,
+    "nativeLanguage": "en",
+    "languages": [
+      "en"
+    ],
+    "clientFramework": "angularX",
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "5.8.2",
+    "jwtSecretKey": "ZTE4OWFmZmI5MTFhZDdkZjNiYWI2NmYyYjdmNDM2NmVjMzc1OTI2ZWZkMDljMzUwZWU0YjUwMWU2ZmEzY2M3MzU1Y2YyMDdlYzZkMDljNmFmNzA2MzVmMzhkZjZiZWNkM2Y3Yjc0ZjRiMzk3ODc1ZjYxODk1NzdhYjc4MzJkMjg=",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": []
+  }
+}
