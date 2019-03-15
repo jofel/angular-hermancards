@@ -92,6 +92,8 @@ will generate few files:
 To optimize the hermancards application for production, run:
 
     ./mvnw -Pprod clean package
+    or
+    mvnw.cmd -Pprod package -DskipTests
 
 This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
 To ensure everything worked, run:
