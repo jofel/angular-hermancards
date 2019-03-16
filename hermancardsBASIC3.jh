@@ -11,7 +11,7 @@ entity Student {
 
 entity Room {
 	name String
-    size Number
+    size Integer
 }
 
 relationship ManyToOne {
@@ -20,7 +20,7 @@ relationship ManyToOne {
 
 entity Card {
     image String
-    createdDate Instant
+    createdDate LocalDate
     losted Boolean
 }
 

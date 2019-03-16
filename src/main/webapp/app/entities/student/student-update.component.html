@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-student-heading">Create or edit a Student</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!student.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="student.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="student.name" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_study">Study</label>
+                    <input type="text" class="form-control" name="study" id="field_study"
+                        [(ngModel)]="student.study" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_rank">Rank</label>
+                    <select class="form-control" name="rank" [(ngModel)]="student.rank" id="field_rank" >
+                        <option value="STUDENT">STUDENT</option>
+                        <option value="KB">KB</option>
+                        <option value="SENIOR">SENIOR</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_room">Room</label>
+                    <select class="form-control" id="field_room" name="room" [(ngModel)]="student.room" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="roomOption.id === student.room?.id ? student.room : roomOption" *ngFor="let roomOption of rooms; trackBy: trackRoomById">{{roomOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
