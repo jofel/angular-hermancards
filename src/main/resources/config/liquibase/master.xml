@@ -12,4 +12,6 @@
     <include file="config/liquibase/changelog/20190316110441_added_entity_constraints_Student.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190316110443_added_entity_constraints_Card.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <include file="config/liquibase/changelog/20190316122400_loaded_entity_Room.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190316172500_loaded_entity_Student.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

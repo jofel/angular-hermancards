@@ -1,0 +1,233 @@
+id;name;study;room_id;jhi_rank
+1;Ábrahám Dávid;Anglisz (2);509;STUDENT
+2;Ádám  Edit;Földr-tört.o.ta (2);212;STUDENT
+3;Ahmed Ali;;710;STUDENT
+4;Albert Csaba;szab.bölcs. (3);807;STUDENT
+5;Andróczki László György;biológus (3);812;STUDENT
+6;Atkári Csaba;földr. (1);508;STUDENT
+7;Babity Balázs;Fiz.-mat.o.t. (3);507;STUDENT
+8;Bakhit Patrik;progt-info (1);702;STUDENT
+9;Balogh  Bence;progt-info (3);606;STUDENT
+10;Balogh  Ádám;földr. (1);802;STUDENT
+11;Balogh Fanni;Biol.PHD (1);512;STUDENT
+12;Batiz Bálint;tört.tan. (3);602;STUDENT
+13;Benedek  Fanni;ker-mark (1);312;STUDENT
+14;Benya  Adorján;biol. (1);508;STUDENT
+15;Berta Gizella Izabella;Biol-mat.o.tan. (5);202;STUDENT
+16;Besze Márton;mol.bio. (3);501;STUDENT
+17;Bobák  Vivien;gazd-inf. (1);412;STUDENT
+18;Bodó  Boglárka;tört.tan. (1);301;STUDENT
+19;Borbély Noémi;képidiagn. (3);302;STUDENT
+20;Bors  Jennifer;jog.aszisz. (1);405;STUDENT
+21;Böcker Luca Réka;biol. (4);207;STUDENT
+22;Bruttyó  Dániel;progt-info (2);703;STUDENT
+23;Bûn  Rudolf;gazd-inf. (2);502;STUDENT
+24;Bûn  Tamás;gazd-inf. (2);502;STUDENT
+25;Csáki  Vivien;biol. (1);203;STUDENT
+26;Csaplár  Beatrix;germ (1);407;STUDENT
+27;Cséplõ Gergely;progt-info (1);801;STUDENT
+28;Csernák Dávid;progt-info (1);607;STUDENT
+29;Csernok  Norbert Anta;mérnök-info (3);910;STUDENT
+30;Csizmadia  Tünde Anita;biol. (1);406;STUDENT
+31;Csomos  Erika;Anglisz (1);204;STUDENT
+32;Csontos  Dániel;biol. (2);603;STUDENT
+33;Csüllög-Hevesi  Máté;ang-magy o.t. (1);805;STUDENT
+34;Cui  Leila Viktória;gazd-menedzs (3);309;STUDENT
+35;Deáki Dominik;biol. (2);612;STUDENT
+36;Dékány Attila Ádám;Vegy_M (2);608;STUDENT
+37;Dénes  András Ferenc;progt-info (1);907;STUDENT
+39;Dobai  Dóra Mária;biol. (3);404;STUDENT
+40;Dobosi Gábor;ker-mark (3);609;STUDENT
+41;Donkó  Darinka Lili;biol. (1);205;STUDENT
+42;Drobnik Valentin;Tört. o.t. (3);605;STUDENT
+43;Ésik  Csaba;mérnök-info (1);801;STUDENT
+44;Eszes Norbert;progt-info (3);811;STUDENT
+45;Farkas  Dzezabel;földr. (1);307;STUDENT
+46;Farkas  Máté;mol.bio. (1);904;STUDENT
+47;Farkas  Máté;kém. (2);704;STUDENT
+48;Fási Milán;progt-info (2);603;STUDENT
+49;Fehér Álmos;komm. (1);510;STUDENT
+50;Fehér  Tamás;pénzügy és szv. (1);505;STUDENT
+51;Fejes  Kristóf Márton;mol.bio. (4);501;STUDENT
+52;Fekete  Imre;nemz.tan. (1);505;STUDENT
+53;Ferencz  Nándor;tört. (2);804;STUDENT
+54;Flaisz  Dominika;biol. (1);203;STUDENT
+56;Francia Dóra;Geogr_M (1);308;STUDENT
+57;Fülöp Adrián;progt-info (2);908;STUDENT
+58;Fürtön Petra;Tört-erkt.o.t. (2);207;STUDENT
+59;Garai Anna;tört. (2);301;STUDENT
+60;Gáti  Szabolcs;földr. (3);706;STUDENT
+61;Gonda Karolina Stella;szab.bölcs. (2);408;STUDENT
+62;Gruncsity Goldina;jog.aszisz. (2);212;STUDENT
+63;Gubics  Flórián Csaba;pszich. (2);809;STUDENT
+64;Gustonj  Andras;polit (3);612;STUDENT
+65;Gyáfrás Tamás;földr. (3);706;STUDENT
+66;Györe Klaudia;progt-info (3);511;STUDENT
+67;Gyurin  Ákos;biol. (2);605;STUDENT
+68;Hajdú Nicoletta;biol. (2);201;STUDENT
+69;Hajzer Alexandra;polit (3);511;STUDENT
+70;Hangya Noémi;germ (3);507;STUDENT
+71;Havár  Csongor;mérnök-info (1);702;STUDENT
+72;Hegedüs  Gitta;szoc. (3);205;STUDENT
+73;Hegyesi János Géza;mat. (3);911;STUDENT
+74;Herczeg  Imre;biol-földr.o.t. (1);904;STUDENT
+75;Hergert  Lea;progt-info (1);203;STUDENT
+76;Hetényi Kinga;biol. (3);511;STUDENT
+77;Hlacs Attila;biol. (3);703;STUDENT
+78;Holop  Ágnes Katalin;biol-földr.o.t. (1);205;STUDENT
+79;Horák Lászlo;gazd-menedzs (1);810;STUDENT
+80;Horvát Melinda;mol.bio. (1);211;STUDENT
+81;Horváth  Mátyás;biol. (5);701;STUDENT
+82;Horváth András Zsolt;kém. (3);912;STUDENT
+83;Horváth  Dániel;fiz. (1);808;STUDENT
+84;Horváth Kristóf;mech.mérn (4);612;STUDENT
+85;Horváth  Réka;mol.bio. (1);304;STUDENT
+86;Illés  Bálint;gazd-inf. (1);712;STUDENT
+87;Imre Kristóf;progt-info (2);912;STUDENT
+88;Jónás Diána;Média-rajz o.t. (4);306;STUDENT
+89;Kacziba Barbara Mária;biomérn. (1);210;STUDENT
+90;Kalmár  István Márk;biol. (1);703;STUDENT
+91;Kancsár Kinga;biol. (1);303;STUDENT
+92;Karlovitz Lionel;biol. (3);803;STUDENT
+93;Kecskés Maconkai  Zsuzsanna;biol. (3);202;STUDENT
+94;Kesik Tamás;gazd-menedzs (3);903;STUDENT
+95;Kincses  Bence;pénzügy és szv. (1);607;STUDENT
+96;Kiss  Csanád;gazd-inf. (1);607;STUDENT
+97;Kiss  Tamás;progt-info (1);504;STUDENT
+98;Kóbor  Ervin;progt-info (3);910;STUDENT
+99;Kocsicska  László;mol.bio. (1);810;STUDENT
+100;Kocsis  Norbert;ang-erk.o.t (1);805;STUDENT
+101;Koma  Máté;polit (3);705;STUDENT
+102;Komka  Robin;régész (1);609;STUDENT
+103;Kovács Márk;gazd-inf. (2);704;STUDENT
+104;Kovács  Tímea;körny.tan (1);204;STUDENT
+105;Kõmûves Tamás;progt-info (3);707;STUDENT
+106;Kõrösi Edvin;biol. (2);711;STUDENT
+107;Kövesi  Vivien;szoc.munk. (2);303;STUDENT
+108;Krajcsik  Dóra;ang-magy o.t. (1);411;STUDENT
+109;Kréz  Zsófia;kém. (1);305;STUDENT
+110;Kukri András;Biol_M (2);911;STUDENT
+111;Kutasi Evelin;;210;STUDENT
+113;Lénárt  Tamás;mol.bio. (1);805;STUDENT
+114;Lipka Barbara;magy-tört. o.t. (2);208;STUDENT
+115;Loe  Attila;földr. (2);907;STUDENT
+116;Lovas  Dániel;komm. (3);503;STUDENT
+117;Lovas Nikolett;;210;STUDENT
+118;Madarász  Edit;körny.tan (3);303;STUDENT
+119;Magyar Zoltán;körny.tan (2);601;STUDENT
+120;Major  Réka;régész (1);407;STUDENT
+121;Majoros  Árpád;progt-info (1);610;STUDENT
+122;Mazán  Nikolett;ang-olasz o.t. (1);305;STUDENT
+123;Meczker Péter;Földr.;610;STUDENT
+124;Medgyesi Zsombor;mérnök-info (2);912;STUDENT
+125;Mészáros  Gábor;mol.bio. (1);806;STUDENT
+126;Mezei Diána;Biol.PHD (2);309;STUDENT
+127;Miklós  Zoltán Ferenc;mérnök-info (3);709;STUDENT
+128;Molnár András Ferenc;jogász (2);604;STUDENT
+129;Molnár  Anett;szoc. (3);308;STUDENT
+130;Molnár Kinga;biomérn. (2);201;STUDENT
+131;Molnár Levente;Földr-tört.o.ta (4);705;STUDENT
+132;Molnár  Vanda Zita;biomérn. (2);211;STUDENT
+133;Mucsi  Tamás;Tört. o.t. (3);602;STUDENT
+134;Nagy Abonyi Gergõ;progt-info (3);707;STUDENT
+135;Nagy  Ádám Richárd;prog.mat. (3);709;STUDENT
+136;Nagy Dezsõ;körny.tan (2);603;STUDENT
+137;Nagy Evelin;szlav-o. (3);209;STUDENT
+138;Nagy  Fanni;biol. (1);305;STUDENT
+139;Nagy  Szabolcs;progt-info (1);806;STUDENT
+140;Nagy Zoltán;progt-info (2);801;STUDENT
+141;Nemes  Arnold;kém. (3);709;STUDENT
+142;Nemes-Andrik  Dávid;Anglisz (3);701;STUDENT
+143;Németh István;progt-info (1);908;STUDENT
+144;Németh Orsolya;biol.-mat. (2);312;STUDENT
+145;Nyári  Kristóf;tört. (1);602;STUDENT
+146;Nyers Katalin;Magy.-ném. o.t. (2);406;STUDENT
+147;Nyírádi Léna;kém. (3);311;STUDENT
+148;Oberhauser  Attila;progt-info (1);811;STUDENT
+149;Paholló  Gergõ;ker-mark (3);807;STUDENT
+150;Pál  Dávid András;biol. (4);808;STUDENT
+151;Pál Viola;Tört. o.t. (3);410;STUDENT
+152;Pálfi  Péter;biol. (2);712;STUDENT
+153;Palika Kamilla Eszter;földr. (2);308;STUDENT
+154;Pandur  Bertold;mérnök-info (1);702;STUDENT
+155;Papp  Bernadett;gazd-menedzs (3);408;STUDENT
+156;Papp  Márk;biol. (2);812;STUDENT
+157;Papp Szabolcs László;germ (3);503;STUDENT
+158;Parti Tímea;szoc.munk. (2);311;STUDENT
+159;Pasztovszki Marcell;polit_M (2);710;STUDENT
+160;Pelsõczi  Alina Beatrix;biol. (2);408;STUDENT
+161;Perényi-Rimai Máté Miklós;mérnök-info (1);506;STUDENT
+162;Piatkó Károly;mol.bio. (3);604;STUDENT
+163;Prekub  Gergely Dániel;polit (1);504;STUDENT
+164;Primusz  Miklós;biol-kém.o.tan. (2);611;STUDENT
+165;Puskás Anna;ókori ny-kult (1);410;STUDENT
+166;Rácz Anna;ker-mark (2);212;STUDENT
+167;Rácz Ottó;Tört. o.t. (4);806;STUDENT
+168;Rétfalvi Jonatán;magy-tört. o.t. (3);803;STUDENT
+169;Rimóczi  Edina;biol. (3);404;STUDENT
+170;Rózsa  Dávid;biol. (1);904;STUDENT
+171;Rózsa Flórián;mérnök-info (1);705;STUDENT
+172;Rubóczki Benjámin;gazd-inf. (2);503;STUDENT
+173;Rubóczki  Dávid;gazd-inf. (2);502;STUDENT
+174;Ruzsinkó Emese;biomérn. (2);312;STUDENT
+175;Sajti Marianna Adrienn;tört. (3);309;STUDENT
+176;Sánta  Barbara;biol-földr.o.t. (3);307;STUDENT
+177;Sárkány Benedek;pénzügy és szv. (5);512;STUDENT
+178;Sebestyén Miklós;biol. - tesi (2);604;STUDENT
+179;Sepsi Ivett;Geogr_M (1);306;STUDENT
+180;Sidlóczki  Bence Béla;földr. (3);708;STUDENT
+181;Simon József Richárd;Földr-tört.o.ta (5);803;STUDENT
+182;Simon Zsanett Ilona;szoc. (2);311;STUDENT
+183;Sipos Donát;Ang.o.t (2);509;STUDENT
+184;Slajchó Petra;Ang.o.t (2);409;STUDENT
+185;Soltész-Nagy  Márton;progt-info (1);504;STUDENT
+186;Stiaszni Alexandra;biol. (4);306;STUDENT
+188;Szabó  Bence;ném.-tört. (2);609;STUDENT
+189;Szabó Bence Gergõ;szoc.munk. (2);608;STUDENT
+190;Szabó  Dominik;mérnök-info (1);506;STUDENT
+191;Szabó  Gergõ László;gazd-inf. (3);601;STUDENT
+192;Szabó György;mérnök-info (5);910;STUDENT
+193;Szabó  Hajnalka;munk.tb.igazg. (2);409;STUDENT
+194;Szabó Nándor Zsolt;magy-tört. o.t. (4);903;STUDENT
+195;Szabó Patrik;progt-info (2);707;STUDENT
+196;Szabó  Petra;germ (3);307;STUDENT
+197;Szabó  Réka;magyar (1);403;STUDENT
+198;Szabó Zsófia;biol.-kém. (3);410;STUDENT
+199;Szabó Zsolt;gazd-inf. (4);808;STUDENT
+200;Szatmári  Kristóf;progt-info (1);903;STUDENT
+201;Szfarli  Alex Dániel;mol.bio. (2);907;STUDENT
+202;Szilák  Zsófia;Fiz.-mat.o.t. (3);206;STUDENT
+203;Szilasi Horváth Balázs;ang-magy o.t. (2);701;STUDENT
+204;Szivós Ádám;biol-kém.o.tan. (6);909;STUDENT
+205;Szüts  Benjamin;gazd-inf. (1);812;STUDENT
+206;Tánczos Fanni;jogász (5);406;STUDENT
+207;Tar Ábrahám;progt-info (3);804;STUDENT
+208;Tar  Bence;mérnök-info (2);704;STUDENT
+209;Topolcsányi  Petronella;biol. (2);209;STUDENT
+210;Torda  Ivett Fanni;biol. (1);202;STUDENT
+211;Torma  Péter;gazd-inf. (2);706;STUDENT
+212;Tóth Aurél;Ang-tört.o.t. (3);807;STUDENT
+213;Tóth  Olivér;földr. (3);708;STUDENT
+214;Tóth Petra Szilvia;komm. (1);407;STUDENT
+215;Tóth Richárd;gazd-inf. (3);911;STUDENT
+216;Tömördi Péter;progt.inf_M (2);501;STUDENT
+217;Udvari Alexandra;biol. (2);201;STUDENT
+218;Urbán  János Dániel;mérnök-info (2);909;STUDENT
+219;Valkai  Máté Dömötör;progt-info (1);908;STUDENT
+220;Varga Ádám;pszich. (3);804;STUDENT
+221;Varga  Attila;mérnök-info (1);506;STUDENT
+222;Varga Attila;progt-info (5);606;STUDENT
+223;Varró Lilla;szlav-o. (3);209;STUDENT
+224;Vatai  Katalin;pszich. (3);310;STUDENT
+225;Vida Linda;biomérn. (4);211;STUDENT
+226;Viemann  Sára;mol.bio. (3);310;STUDENT
+227;Vig Viktor;biol. (2);802;STUDENT 
+228;Világos  Gyöngyi Szabina;progt-info (3);412;STUDENT
+229;Vincze  Virág;biol. (1);403;STUDENT
+230;Virág László;magy-tört. o.t. (3);809;STUDENT
+231;Zerebélyi  Evelin;biol. (3);411;STUDENT
+232;Zerebélyi Rebeka;pszich. (4);510;STUDENT
+233;Ziegenheim Gitta Katalin;biol-kém.o.tan. (5);206;STUDENT
+234;Zimmermann  Ádám;körny.mérnök (1);601;STUDENT
+235;Zsigri  Nikolett;biol. (3);310;STUDENT
+236;Zsirai  Réka;ang.-biol. o.t. (1);404;STUDENT

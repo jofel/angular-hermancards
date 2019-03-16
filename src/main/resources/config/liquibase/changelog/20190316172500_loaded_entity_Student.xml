@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added data for entity Room.
+        20190316122400_loaded_entity_Room.xml
+    -->
+    <changeSet id="20190316172500-1" author="jhipster">
+        
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/hallgatok_20190312_v2_herman.csv"
+                  separator=";"
+                  tableName="student">
+        </loadData>
+
+    </changeSet>
+    
+</databaseChangeLog>
