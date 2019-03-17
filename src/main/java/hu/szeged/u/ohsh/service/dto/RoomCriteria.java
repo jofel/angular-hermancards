@@ -26,7 +26,7 @@ public class RoomCriteria implements Serializable {
 
     private StringFilter name;
 
-    private IntegerFilter size;
+    private IntegerFilter bed;
 
     public LongFilter getId() {
         return id;
@@ -44,12 +44,12 @@ public class RoomCriteria implements Serializable {
         this.name = name;
     }
 
-    public IntegerFilter getSize() {
-        return size;
+    public IntegerFilter getBed() {
+        return bed;
     }
 
-    public void setSize(IntegerFilter size) {
-        this.size = size;
+    public void setBed(IntegerFilter bed) {
+        this.bed = bed;
     }
 
 
@@ -65,7 +65,7 @@ public class RoomCriteria implements Serializable {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
-            Objects.equals(size, that.size);
+            Objects.equals(bed, that.bed);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class RoomCriteria implements Serializable {
         return Objects.hash(
         id,
         name,
-        size
+        bed
         );
     }
 
@@ -82,7 +82,7 @@ public class RoomCriteria implements Serializable {
         return "RoomCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
-                (size != null ? "size=" + size + ", " : "") +
+                (bed != null ? "bed=" + bed + ", " : "") +
             "}";
     }
 

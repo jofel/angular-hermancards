@@ -1,23 +1,23 @@
 {
-    "name": "Room",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
     "fields": [
         {
             "fieldName": "name",
             "fieldType": "String"
         },
         {
-            "fieldName": "size",
+            "fieldName": "bed",
             "fieldType": "Integer"
         }
     ],
-    "relationships": [],
     "changelogDate": "20190316110442",
-    "entityTableName": "room",
     "dto": "no",
-    "pagination": "infinite-scroll",
+    "searchEngine": false,
     "service": "serviceClass",
+    "entityTableName": "room",
+    "databaseType": "sql",
     "jpaMetamodelFiltering": true,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "infinite-scroll"
 }

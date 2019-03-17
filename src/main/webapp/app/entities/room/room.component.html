@@ -16,7 +16,7 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span>Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="size"><span>Size</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bed"><span>Bed</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -24,7 +24,7 @@
             <tr *ngFor="let room of rooms ;trackBy: trackId">
                 <td><a [routerLink]="['/room', room.id, 'view' ]">{{room.id}}</a></td>
                 <td>{{room.name}}</td>
-                <td>{{room.size}}</td>
+                <td>{{room.bed}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

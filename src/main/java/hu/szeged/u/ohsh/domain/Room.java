@@ -27,8 +27,8 @@ public class Room implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "jhi_size")
-    private Integer size;
+    @Column(name = "bed")
+    private Integer bed;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -52,17 +52,17 @@ public class Room implements Serializable {
         this.name = name;
     }
 
-    public Integer getSize() {
-        return size;
+    public Integer getBed() {
+        return bed;
     }
 
-    public Room size(Integer size) {
-        this.size = size;
+    public Room bed(Integer bed) {
+        this.bed = bed;
         return this;
     }
 
-    public void setSize(Integer size) {
-        this.size = size;
+    public void setBed(Integer bed) {
+        this.bed = bed;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -91,7 +91,7 @@ public class Room implements Serializable {
         return "Room{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", size=" + getSize() +
+            ", bed=" + getBed() +
             "}";
     }
 }

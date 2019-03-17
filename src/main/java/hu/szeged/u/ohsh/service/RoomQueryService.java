@@ -86,8 +86,8 @@ public class RoomQueryService extends QueryService<Room> {
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), Room_.name));
             }
-            if (criteria.getSize() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getSize(), Room_.size));
+            if (criteria.getBed() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getBed(), Room_.bed));
             }
         }
         return specification;

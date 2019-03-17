@@ -46,8 +46,8 @@ public class RoomResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_SIZE = 1;
-    private static final Integer UPDATED_SIZE = 2;
+    private static final Integer DEFAULT_BED = 1;
+    private static final Integer UPDATED_BED = 2;
 
     @Autowired
     private RoomRepository roomRepository;
@@ -98,7 +98,7 @@ public class RoomResourceIntTest {
     public static Room createEntity(EntityManager em) {
         Room room = new Room()
             .name(DEFAULT_NAME)
-            .size(DEFAULT_SIZE);
+            .bed(DEFAULT_BED);
         return room;
     }
 
@@ -123,7 +123,7 @@ public class RoomResourceIntTest {
         assertThat(roomList).hasSize(databaseSizeBeforeCreate + 1);
         Room testRoom = roomList.get(roomList.size() - 1);
         assertThat(testRoom.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testRoom.getSize()).isEqualTo(DEFAULT_SIZE);
+        assertThat(testRoom.getBed()).isEqualTo(DEFAULT_BED);
     }
 
     @Test
@@ -157,7 +157,7 @@ public class RoomResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(room.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].size").value(hasItem(DEFAULT_SIZE)));
+            .andExpect(jsonPath("$.[*].bed").value(hasItem(DEFAULT_BED)));
     }
     
     @Test
@@ -172,7 +172,7 @@ public class RoomResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(room.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.size").value(DEFAULT_SIZE));
+            .andExpect(jsonPath("$.bed").value(DEFAULT_BED));
     }
 
     @Test
@@ -216,67 +216,67 @@ public class RoomResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllRoomsBySizeIsEqualToSomething() throws Exception {
+    public void getAllRoomsByBedIsEqualToSomething() throws Exception {
         // Initialize the database
         roomRepository.saveAndFlush(room);
 
-        // Get all the roomList where size equals to DEFAULT_SIZE
-        defaultRoomShouldBeFound("size.equals=" + DEFAULT_SIZE);
+        // Get all the roomList where bed equals to DEFAULT_BED
+        defaultRoomShouldBeFound("bed.equals=" + DEFAULT_BED);
 
-        // Get all the roomList where size equals to UPDATED_SIZE
-        defaultRoomShouldNotBeFound("size.equals=" + UPDATED_SIZE);
+        // Get all the roomList where bed equals to UPDATED_BED
+        defaultRoomShouldNotBeFound("bed.equals=" + UPDATED_BED);
     }
 
     @Test
     @Transactional
-    public void getAllRoomsBySizeIsInShouldWork() throws Exception {
+    public void getAllRoomsByBedIsInShouldWork() throws Exception {
         // Initialize the database
         roomRepository.saveAndFlush(room);
 
-        // Get all the roomList where size in DEFAULT_SIZE or UPDATED_SIZE
-        defaultRoomShouldBeFound("size.in=" + DEFAULT_SIZE + "," + UPDATED_SIZE);
+        // Get all the roomList where bed in DEFAULT_BED or UPDATED_BED
+        defaultRoomShouldBeFound("bed.in=" + DEFAULT_BED + "," + UPDATED_BED);
 
-        // Get all the roomList where size equals to UPDATED_SIZE
-        defaultRoomShouldNotBeFound("size.in=" + UPDATED_SIZE);
+        // Get all the roomList where bed equals to UPDATED_BED
+        defaultRoomShouldNotBeFound("bed.in=" + UPDATED_BED);
     }
 
     @Test
     @Transactional
-    public void getAllRoomsBySizeIsNullOrNotNull() throws Exception {
+    public void getAllRoomsByBedIsNullOrNotNull() throws Exception {
         // Initialize the database
         roomRepository.saveAndFlush(room);
 
-        // Get all the roomList where size is not null
-        defaultRoomShouldBeFound("size.specified=true");
+        // Get all the roomList where bed is not null
+        defaultRoomShouldBeFound("bed.specified=true");
 
-        // Get all the roomList where size is null
-        defaultRoomShouldNotBeFound("size.specified=false");
+        // Get all the roomList where bed is null
+        defaultRoomShouldNotBeFound("bed.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllRoomsBySizeIsGreaterThanOrEqualToSomething() throws Exception {
+    public void getAllRoomsByBedIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         roomRepository.saveAndFlush(room);
 
-        // Get all the roomList where size greater than or equals to DEFAULT_SIZE
-        defaultRoomShouldBeFound("size.greaterOrEqualThan=" + DEFAULT_SIZE);
+        // Get all the roomList where bed greater than or equals to DEFAULT_BED
+        defaultRoomShouldBeFound("bed.greaterOrEqualThan=" + DEFAULT_BED);
 
-        // Get all the roomList where size greater than or equals to UPDATED_SIZE
-        defaultRoomShouldNotBeFound("size.greaterOrEqualThan=" + UPDATED_SIZE);
+        // Get all the roomList where bed greater than or equals to UPDATED_BED
+        defaultRoomShouldNotBeFound("bed.greaterOrEqualThan=" + UPDATED_BED);
     }
 
     @Test
     @Transactional
-    public void getAllRoomsBySizeIsLessThanSomething() throws Exception {
+    public void getAllRoomsByBedIsLessThanSomething() throws Exception {
         // Initialize the database
         roomRepository.saveAndFlush(room);
 
-        // Get all the roomList where size less than or equals to DEFAULT_SIZE
-        defaultRoomShouldNotBeFound("size.lessThan=" + DEFAULT_SIZE);
+        // Get all the roomList where bed less than or equals to DEFAULT_BED
+        defaultRoomShouldNotBeFound("bed.lessThan=" + DEFAULT_BED);
 
-        // Get all the roomList where size less than or equals to UPDATED_SIZE
-        defaultRoomShouldBeFound("size.lessThan=" + UPDATED_SIZE);
+        // Get all the roomList where bed less than or equals to UPDATED_BED
+        defaultRoomShouldBeFound("bed.lessThan=" + UPDATED_BED);
     }
 
     /**
@@ -288,7 +288,7 @@ public class RoomResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(room.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].size").value(hasItem(DEFAULT_SIZE)));
+            .andExpect(jsonPath("$.[*].bed").value(hasItem(DEFAULT_BED)));
 
         // Check, that the count call also returns 1
         restRoomMockMvc.perform(get("/api/rooms/count?sort=id,desc&" + filter))
@@ -337,7 +337,7 @@ public class RoomResourceIntTest {
         em.detach(updatedRoom);
         updatedRoom
             .name(UPDATED_NAME)
-            .size(UPDATED_SIZE);
+            .bed(UPDATED_BED);
 
         restRoomMockMvc.perform(put("/api/rooms")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -349,7 +349,7 @@ public class RoomResourceIntTest {
         assertThat(roomList).hasSize(databaseSizeBeforeUpdate);
         Room testRoom = roomList.get(roomList.size() - 1);
         assertThat(testRoom.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testRoom.getSize()).isEqualTo(UPDATED_SIZE);
+        assertThat(testRoom.getBed()).isEqualTo(UPDATED_BED);
     }
 
     @Test

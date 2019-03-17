@@ -56,7 +56,7 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        size: 1
+                        bed: 1
                     },
                     elemDefault
                 );
@@ -74,7 +74,7 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        size: 1
+                        bed: 1
                     },
                     elemDefault
                 );
