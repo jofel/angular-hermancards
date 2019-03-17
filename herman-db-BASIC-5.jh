@@ -1,0 +1,37 @@
+// Data tables
+enum Rank {
+    STUDENT, KB, SENIOR
+}
+
+entity Student {
+	name String,
+    study String,
+    rank Rank,
+    image ImageBlob
+}
+
+entity Room {
+	name String,
+    size Integer
+}
+
+entity Card {
+    createdDate Instant,
+    losted Boolean,
+    active Boolean
+}
+
+relationship ManyToOne {
+	Student{room} to Room
+}
+
+relationship OneToMany {
+	Student{card} to Card
+}
+
+// Set pagination options
+paginate Card, Student, Room with infinite-scroll
+
+// Set service options to all except few
+service all with serviceImpl
+
