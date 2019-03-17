@@ -25,14 +25,14 @@ public class Card implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "image")
-    private String image;
-
     @Column(name = "created_date")
     private LocalDate createdDate;
 
     @Column(name = "losted")
     private Boolean losted;
+
+    @Column(name = "active")
+    private Boolean active;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -45,19 +45,6 @@ public class Card implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public Card image(String image) {
-        this.image = image;
-        return this;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public LocalDate getCreatedDate() {
@@ -84,6 +71,19 @@ public class Card implements Serializable {
 
     public void setLosted(Boolean losted) {
         this.losted = losted;
+    }
+
+    public Boolean isActive() {
+        return active;
+    }
+
+    public Card active(Boolean active) {
+        this.active = active;
+        return this;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Student getStudent() {
@@ -124,9 +124,9 @@ public class Card implements Serializable {
     public String toString() {
         return "Card{" +
             "id=" + getId() +
-            ", image='" + getImage() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", losted='" + isLosted() + "'" +
+            ", active='" + isActive() + "'" +
             "}";
     }
 }

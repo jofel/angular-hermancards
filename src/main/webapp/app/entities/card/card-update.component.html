@@ -10,11 +10,6 @@
                         [(ngModel)]="card.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_image">Image</label>
-                    <input type="text" class="form-control" name="image" id="field_image"
-                        [(ngModel)]="card.image" />
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" for="field_createdDate">Created Date</label>
                     <div class="input-group">
                         <input id="field_createdDate" type="text" class="form-control" name="createdDate" ngbDatepicker  #createdDateDp="ngbDatepicker" [(ngModel)]="card.createdDate"
@@ -28,6 +23,11 @@
                     <label class="form-control-label" for="field_losted">Losted</label>
                     <input type="checkbox" class="form-control" name="losted" id="field_losted"
                         [(ngModel)]="card.losted" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_active">Active</label>
+                    <input type="checkbox" class="form-control" name="active" id="field_active"
+                        [(ngModel)]="card.active" />
                 </div>
 
                 <div class="form-group">

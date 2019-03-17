@@ -43,14 +43,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = HermancardsApp.class)
 public class CardResourceIntTest {
 
-    private static final String DEFAULT_IMAGE = "AAAAAAAAAA";
-    private static final String UPDATED_IMAGE = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_CREATED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final Boolean DEFAULT_LOSTED = false;
     private static final Boolean UPDATED_LOSTED = true;
+
+    private static final Boolean DEFAULT_ACTIVE = false;
+    private static final Boolean UPDATED_ACTIVE = true;
 
     @Autowired
     private CardRepository cardRepository;
@@ -97,9 +97,9 @@ public class CardResourceIntTest {
      */
     public static Card createEntity(EntityManager em) {
         Card card = new Card()
-            .image(DEFAULT_IMAGE)
             .createdDate(DEFAULT_CREATED_DATE)
-            .losted(DEFAULT_LOSTED);
+            .losted(DEFAULT_LOSTED)
+            .active(DEFAULT_ACTIVE);
         return card;
     }
 
@@ -123,9 +123,9 @@ public class CardResourceIntTest {
         List<Card> cardList = cardRepository.findAll();
         assertThat(cardList).hasSize(databaseSizeBeforeCreate + 1);
         Card testCard = cardList.get(cardList.size() - 1);
-        assertThat(testCard.getImage()).isEqualTo(DEFAULT_IMAGE);
         assertThat(testCard.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testCard.isLosted()).isEqualTo(DEFAULT_LOSTED);
+        assertThat(testCard.isActive()).isEqualTo(DEFAULT_ACTIVE);
     }
 
     @Test
@@ -158,9 +158,9 @@ public class CardResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(card.getId().intValue())))
-            .andExpect(jsonPath("$.[*].image").value(hasItem(DEFAULT_IMAGE.toString())))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].losted").value(hasItem(DEFAULT_LOSTED.booleanValue())));
+            .andExpect(jsonPath("$.[*].losted").value(hasItem(DEFAULT_LOSTED.booleanValue())))
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
     }
     
     @Test
@@ -174,9 +174,9 @@ public class CardResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(card.getId().intValue()))
-            .andExpect(jsonPath("$.image").value(DEFAULT_IMAGE.toString()))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
-            .andExpect(jsonPath("$.losted").value(DEFAULT_LOSTED.booleanValue()));
+            .andExpect(jsonPath("$.losted").value(DEFAULT_LOSTED.booleanValue()))
+            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()));
     }
 
     @Test
@@ -200,9 +200,9 @@ public class CardResourceIntTest {
         // Disconnect from session so that the updates on updatedCard are not directly saved in db
         em.detach(updatedCard);
         updatedCard
-            .image(UPDATED_IMAGE)
             .createdDate(UPDATED_CREATED_DATE)
-            .losted(UPDATED_LOSTED);
+            .losted(UPDATED_LOSTED)
+            .active(UPDATED_ACTIVE);
 
         restCardMockMvc.perform(put("/api/cards")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -213,9 +213,9 @@ public class CardResourceIntTest {
         List<Card> cardList = cardRepository.findAll();
         assertThat(cardList).hasSize(databaseSizeBeforeUpdate);
         Card testCard = cardList.get(cardList.size() - 1);
-        assertThat(testCard.getImage()).isEqualTo(UPDATED_IMAGE);
         assertThat(testCard.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testCard.isLosted()).isEqualTo(UPDATED_LOSTED);
+        assertThat(testCard.isActive()).isEqualTo(UPDATED_ACTIVE);
     }
 
     @Test

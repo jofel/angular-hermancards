@@ -1,19 +1,6 @@
 {
-    "name": "Card",
-    "fields": [
-        {
-            "fieldName": "image",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "createdDate",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "losted",
-            "fieldType": "Boolean"
-        }
-    ],
+    "fluentMethods": true,
+    "clientRootFolder": "",
     "relationships": [
         {
             "relationshipType": "one-to-one",
@@ -21,16 +8,30 @@
             "otherEntityRelationshipName": "card",
             "relationshipName": "student",
             "otherEntityField": "id",
-            "ownerSide": true
+            "ownerSide": true,
+            "otherEntityRelationshipNameUndefined": false
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "createdDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "losted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20190316110443",
-    "entityTableName": "card",
     "dto": "no",
-    "pagination": "infinite-scroll",
+    "searchEngine": false,
     "service": "serviceImpl",
+    "entityTableName": "card",
+    "databaseType": "sql",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "infinite-scroll"
 }

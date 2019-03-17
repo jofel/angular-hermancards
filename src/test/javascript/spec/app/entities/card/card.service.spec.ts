@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Card(0, 'AAAAAAA', currentDate, false);
+            elemDefault = new Card(0, currentDate, false, false);
         });
 
         describe('Service methods', async () => {
@@ -70,9 +70,9 @@ describe('Service Tests', () => {
             it('should update a Card', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        image: 'BBBBBB',
                         createdDate: currentDate.format(DATE_FORMAT),
-                        losted: true
+                        losted: true,
+                        active: true
                     },
                     elemDefault
                 );
@@ -94,9 +94,9 @@ describe('Service Tests', () => {
             it('should return a list of Card', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        image: 'BBBBBB',
                         createdDate: currentDate.format(DATE_FORMAT),
-                        losted: true
+                        losted: true,
+                        active: true
                     },
                     elemDefault
                 );

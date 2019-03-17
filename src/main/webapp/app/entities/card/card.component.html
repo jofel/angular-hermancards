@@ -15,9 +15,9 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="image"><span>Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createdDate"><span>Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="losted"><span>Losted</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="active"><span>Active</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="student.id"><span>Student</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -25,9 +25,9 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let card of cards ;trackBy: trackId">
                 <td><a [routerLink]="['/card', card.id, 'view' ]">{{card.id}}</a></td>
-                <td>{{card.image}}</td>
                 <td>{{card.createdDate | date:'mediumDate'}}</td>
                 <td>{{card.losted}}</td>
+                <td>{{card.active}}</td>
                 <td>
                     <div *ngIf="card.student">
                         <a [routerLink]="['../student', card.student?.id, 'view' ]" >{{card.student?.id}}</a>

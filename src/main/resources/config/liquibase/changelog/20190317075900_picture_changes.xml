@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added default value to entities.
+        20190317075900_picture_changes
+    -->
+    <changeSet id="20190317075900-1" author="fodorj">
+        <addColumn
+            schemaName="public"
+            tableName="card">
+            <column name="active" type="boolean"/>
+        </addColumn>
+
+        <dropColumn
+            schemaName="public"
+            tableName="card"
+            columnName="image"/>
+
+        <addColumn
+            schemaName="public"
+            tableName="student">
+            <column name="picture" type="varchar(255)"/>
+        </addColumn>
+        
+    </changeSet>
+</databaseChangeLog>
