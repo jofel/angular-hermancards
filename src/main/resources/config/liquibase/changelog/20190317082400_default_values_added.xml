@@ -25,7 +25,7 @@
             tableName="student"/>
         <addDefaultValue
             columnDataType="integer"
-            columnName="jhi_size"
+            columnName="bed"
             defaultValue="3"
             schemaName="public"
             tableName="room"/>
