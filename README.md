@@ -179,3 +179,22 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [protractor]: https://angular.github.io/protractor/
 [leaflet]: http://leafletjs.com/
 [definitelytyped]: http://definitelytyped.org/
+
+## Entity regenerate
+
+1. Edit the json file representing your entity (add/remove field, the syntax is pretty easy, check in the end of the file if is required any change to the general entity properties like 'fieldsContainOneToMany'...), you'll find it in:
+    ```
+    <jhipster_root_folder>/.jhipster/entityName.json
+    ```
+2. Build the code.
+
+3. In the root of your project run the command:
+    ```
+    jhipster entity entityName
+    ```
+NOTE: this command by default overwrite all your manual changes. I recommend to do a commit on a VCS repository before to run this command to eventually revert any not required change.
+    
+4. run
+    ```
+    mvn liquibase:diff
+    ```
