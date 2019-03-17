@@ -6,6 +6,8 @@ import hu.szeged.u.ohsh.domain.Room;
 import hu.szeged.u.ohsh.repository.RoomRepository;
 import hu.szeged.u.ohsh.service.RoomService;
 import hu.szeged.u.ohsh.web.rest.errors.ExceptionTranslator;
+import hu.szeged.u.ohsh.service.dto.RoomCriteria;
+import hu.szeged.u.ohsh.service.RoomQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,6 +56,9 @@ public class RoomResourceIntTest {
     private RoomService roomService;
 
     @Autowired
+    private RoomQueryService roomQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -75,7 +80,7 @@ public class RoomResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final RoomResource roomResource = new RoomResource(roomService);
+        final RoomResource roomResource = new RoomResource(roomService, roomQueryService);
         this.restRoomMockMvc = MockMvcBuilders.standaloneSetup(roomResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -169,6 +174,146 @@ public class RoomResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.size").value(DEFAULT_SIZE));
     }
+
+    @Test
+    @Transactional
+    public void getAllRoomsByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        roomRepository.saveAndFlush(room);
+
+        // Get all the roomList where name equals to DEFAULT_NAME
+        defaultRoomShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the roomList where name equals to UPDATED_NAME
+        defaultRoomShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRoomsByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        roomRepository.saveAndFlush(room);
+
+        // Get all the roomList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultRoomShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the roomList where name equals to UPDATED_NAME
+        defaultRoomShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRoomsByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        roomRepository.saveAndFlush(room);
+
+        // Get all the roomList where name is not null
+        defaultRoomShouldBeFound("name.specified=true");
+
+        // Get all the roomList where name is null
+        defaultRoomShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRoomsBySizeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        roomRepository.saveAndFlush(room);
+
+        // Get all the roomList where size equals to DEFAULT_SIZE
+        defaultRoomShouldBeFound("size.equals=" + DEFAULT_SIZE);
+
+        // Get all the roomList where size equals to UPDATED_SIZE
+        defaultRoomShouldNotBeFound("size.equals=" + UPDATED_SIZE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRoomsBySizeIsInShouldWork() throws Exception {
+        // Initialize the database
+        roomRepository.saveAndFlush(room);
+
+        // Get all the roomList where size in DEFAULT_SIZE or UPDATED_SIZE
+        defaultRoomShouldBeFound("size.in=" + DEFAULT_SIZE + "," + UPDATED_SIZE);
+
+        // Get all the roomList where size equals to UPDATED_SIZE
+        defaultRoomShouldNotBeFound("size.in=" + UPDATED_SIZE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRoomsBySizeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        roomRepository.saveAndFlush(room);
+
+        // Get all the roomList where size is not null
+        defaultRoomShouldBeFound("size.specified=true");
+
+        // Get all the roomList where size is null
+        defaultRoomShouldNotBeFound("size.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllRoomsBySizeIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        roomRepository.saveAndFlush(room);
+
+        // Get all the roomList where size greater than or equals to DEFAULT_SIZE
+        defaultRoomShouldBeFound("size.greaterOrEqualThan=" + DEFAULT_SIZE);
+
+        // Get all the roomList where size greater than or equals to UPDATED_SIZE
+        defaultRoomShouldNotBeFound("size.greaterOrEqualThan=" + UPDATED_SIZE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllRoomsBySizeIsLessThanSomething() throws Exception {
+        // Initialize the database
+        roomRepository.saveAndFlush(room);
+
+        // Get all the roomList where size less than or equals to DEFAULT_SIZE
+        defaultRoomShouldNotBeFound("size.lessThan=" + DEFAULT_SIZE);
+
+        // Get all the roomList where size less than or equals to UPDATED_SIZE
+        defaultRoomShouldBeFound("size.lessThan=" + UPDATED_SIZE);
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultRoomShouldBeFound(String filter) throws Exception {
+        restRoomMockMvc.perform(get("/api/rooms?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(room.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].size").value(hasItem(DEFAULT_SIZE)));
+
+        // Check, that the count call also returns 1
+        restRoomMockMvc.perform(get("/api/rooms/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultRoomShouldNotBeFound(String filter) throws Exception {
+        restRoomMockMvc.perform(get("/api/rooms?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restRoomMockMvc.perform(get("/api/rooms/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional

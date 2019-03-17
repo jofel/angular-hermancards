@@ -25,6 +25,10 @@ export class RoomComponent implements OnInit, OnDestroy {
     reverse: any;
     totalItems: number;
 
+    idFilter = '';
+    nameFilter = '';
+    sizeFilter = '';
+
     constructor(
         protected roomService: RoomService,
         protected jhiAlertService: JhiAlertService,
@@ -46,8 +50,11 @@ export class RoomComponent implements OnInit, OnDestroy {
         this.roomService
             .query({
                 page: this.page,
-                size: this.itemsPerPage,
-                sort: this.sort()
+                // size: this.itemsPerPage,
+                sort: this.sort(),
+                'id.equals': this.idFilter,
+                'name.contains': this.nameFilter,
+                'size.equals': this.sizeFilter
             })
             .subscribe(
                 (res: HttpResponse<IRoom[]>) => this.paginateRooms(res.body, res.headers),

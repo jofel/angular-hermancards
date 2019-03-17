@@ -15,8 +15,8 @@
     "entityTableName": "room",
     "dto": "no",
     "pagination": "infinite-scroll",
-    "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*"

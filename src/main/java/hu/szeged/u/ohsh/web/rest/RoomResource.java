@@ -4,6 +4,8 @@ import hu.szeged.u.ohsh.service.RoomService;
 import hu.szeged.u.ohsh.web.rest.errors.BadRequestAlertException;
 import hu.szeged.u.ohsh.web.rest.util.HeaderUtil;
 import hu.szeged.u.ohsh.web.rest.util.PaginationUtil;
+import hu.szeged.u.ohsh.service.dto.RoomCriteria;
+import hu.szeged.u.ohsh.service.RoomQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +35,11 @@ public class RoomResource {
 
     private final RoomService roomService;
 
-    public RoomResource(RoomService roomService) {
+    private final RoomQueryService roomQueryService;
+
+    public RoomResource(RoomService roomService, RoomQueryService roomQueryService) {
         this.roomService = roomService;
+        this.roomQueryService = roomQueryService;
     }
 
     /**
@@ -81,14 +86,27 @@ public class RoomResource {
      * GET  /rooms : get all the rooms.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of rooms in body
      */
     @GetMapping("/rooms")
-    public ResponseEntity<List<Room>> getAllRooms(Pageable pageable) {
-        log.debug("REST request to get a page of Rooms");
-        Page<Room> page = roomService.findAll(pageable);
+    public ResponseEntity<List<Room>> getAllRooms(RoomCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Rooms by criteria: {}", criteria);
+        Page<Room> page = roomQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/rooms");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * GET  /rooms/count : count all the rooms.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/rooms/count")
+    public ResponseEntity<Long> countRooms(RoomCriteria criteria) {
+        log.debug("REST request to count Rooms by criteria: {}", criteria);
+        return ResponseEntity.ok().body(roomQueryService.countByCriteria(criteria));
     }
 
     /**
