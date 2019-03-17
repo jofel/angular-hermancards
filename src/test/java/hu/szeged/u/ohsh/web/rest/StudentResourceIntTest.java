@@ -3,9 +3,12 @@ package hu.szeged.u.ohsh.web.rest;
 import hu.szeged.u.ohsh.HermancardsApp;
 
 import hu.szeged.u.ohsh.domain.Student;
+import hu.szeged.u.ohsh.domain.Room;
 import hu.szeged.u.ohsh.repository.StudentRepository;
 import hu.szeged.u.ohsh.service.StudentService;
 import hu.szeged.u.ohsh.web.rest.errors.ExceptionTranslator;
+import hu.szeged.u.ohsh.service.dto.StudentCriteria;
+import hu.szeged.u.ohsh.service.StudentQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +61,9 @@ public class StudentResourceIntTest {
     private StudentService studentService;
 
     @Autowired
+    private StudentQueryService studentQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -79,7 +85,7 @@ public class StudentResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final StudentResource studentResource = new StudentResource(studentService);
+        final StudentResource studentResource = new StudentResource(studentService, studentQueryService);
         this.restStudentMockMvc = MockMvcBuilders.standaloneSetup(studentResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -177,6 +183,178 @@ public class StudentResourceIntTest {
             .andExpect(jsonPath("$.study").value(DEFAULT_STUDY.toString()))
             .andExpect(jsonPath("$.rank").value(DEFAULT_RANK.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllStudentsByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        studentRepository.saveAndFlush(student);
+
+        // Get all the studentList where name equals to DEFAULT_NAME
+        defaultStudentShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the studentList where name equals to UPDATED_NAME
+        defaultStudentShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStudentsByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        studentRepository.saveAndFlush(student);
+
+        // Get all the studentList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultStudentShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the studentList where name equals to UPDATED_NAME
+        defaultStudentShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStudentsByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        studentRepository.saveAndFlush(student);
+
+        // Get all the studentList where name is not null
+        defaultStudentShouldBeFound("name.specified=true");
+
+        // Get all the studentList where name is null
+        defaultStudentShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStudentsByStudyIsEqualToSomething() throws Exception {
+        // Initialize the database
+        studentRepository.saveAndFlush(student);
+
+        // Get all the studentList where study equals to DEFAULT_STUDY
+        defaultStudentShouldBeFound("study.equals=" + DEFAULT_STUDY);
+
+        // Get all the studentList where study equals to UPDATED_STUDY
+        defaultStudentShouldNotBeFound("study.equals=" + UPDATED_STUDY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStudentsByStudyIsInShouldWork() throws Exception {
+        // Initialize the database
+        studentRepository.saveAndFlush(student);
+
+        // Get all the studentList where study in DEFAULT_STUDY or UPDATED_STUDY
+        defaultStudentShouldBeFound("study.in=" + DEFAULT_STUDY + "," + UPDATED_STUDY);
+
+        // Get all the studentList where study equals to UPDATED_STUDY
+        defaultStudentShouldNotBeFound("study.in=" + UPDATED_STUDY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStudentsByStudyIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        studentRepository.saveAndFlush(student);
+
+        // Get all the studentList where study is not null
+        defaultStudentShouldBeFound("study.specified=true");
+
+        // Get all the studentList where study is null
+        defaultStudentShouldNotBeFound("study.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStudentsByRankIsEqualToSomething() throws Exception {
+        // Initialize the database
+        studentRepository.saveAndFlush(student);
+
+        // Get all the studentList where rank equals to DEFAULT_RANK
+        defaultStudentShouldBeFound("rank.equals=" + DEFAULT_RANK);
+
+        // Get all the studentList where rank equals to UPDATED_RANK
+        defaultStudentShouldNotBeFound("rank.equals=" + UPDATED_RANK);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStudentsByRankIsInShouldWork() throws Exception {
+        // Initialize the database
+        studentRepository.saveAndFlush(student);
+
+        // Get all the studentList where rank in DEFAULT_RANK or UPDATED_RANK
+        defaultStudentShouldBeFound("rank.in=" + DEFAULT_RANK + "," + UPDATED_RANK);
+
+        // Get all the studentList where rank equals to UPDATED_RANK
+        defaultStudentShouldNotBeFound("rank.in=" + UPDATED_RANK);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStudentsByRankIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        studentRepository.saveAndFlush(student);
+
+        // Get all the studentList where rank is not null
+        defaultStudentShouldBeFound("rank.specified=true");
+
+        // Get all the studentList where rank is null
+        defaultStudentShouldNotBeFound("rank.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStudentsByRoomIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Room room = RoomResourceIntTest.createEntity(em);
+        em.persist(room);
+        em.flush();
+        student.setRoom(room);
+        studentRepository.saveAndFlush(student);
+        Long roomId = room.getId();
+
+        // Get all the studentList where room equals to roomId
+        defaultStudentShouldBeFound("roomId.equals=" + roomId);
+
+        // Get all the studentList where room equals to roomId + 1
+        defaultStudentShouldNotBeFound("roomId.equals=" + (roomId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultStudentShouldBeFound(String filter) throws Exception {
+        restStudentMockMvc.perform(get("/api/students?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(student.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].study").value(hasItem(DEFAULT_STUDY)))
+            .andExpect(jsonPath("$.[*].rank").value(hasItem(DEFAULT_RANK.toString())));
+
+        // Check, that the count call also returns 1
+        restStudentMockMvc.perform(get("/api/students/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultStudentShouldNotBeFound(String filter) throws Exception {
+        restStudentMockMvc.perform(get("/api/students?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restStudentMockMvc.perform(get("/api/students/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional

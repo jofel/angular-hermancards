@@ -3,9 +3,12 @@ package hu.szeged.u.ohsh.web.rest;
 import hu.szeged.u.ohsh.HermancardsApp;
 
 import hu.szeged.u.ohsh.domain.Card;
+import hu.szeged.u.ohsh.domain.Student;
 import hu.szeged.u.ohsh.repository.CardRepository;
 import hu.szeged.u.ohsh.service.CardService;
 import hu.szeged.u.ohsh.web.rest.errors.ExceptionTranslator;
+import hu.szeged.u.ohsh.service.dto.CardCriteria;
+import hu.szeged.u.ohsh.service.CardQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,6 +62,9 @@ public class CardResourceIntTest {
     private CardService cardService;
 
     @Autowired
+    private CardQueryService cardQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -80,7 +86,7 @@ public class CardResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CardResource cardResource = new CardResource(cardService);
+        final CardResource cardResource = new CardResource(cardService, cardQueryService);
         this.restCardMockMvc = MockMvcBuilders.standaloneSetup(cardResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -178,6 +184,205 @@ public class CardResourceIntTest {
             .andExpect(jsonPath("$.losted").value(DEFAULT_LOSTED.booleanValue()))
             .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()));
     }
+
+    @Test
+    @Transactional
+    public void getAllCardsByCreatedDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        cardRepository.saveAndFlush(card);
+
+        // Get all the cardList where createdDate equals to DEFAULT_CREATED_DATE
+        defaultCardShouldBeFound("createdDate.equals=" + DEFAULT_CREATED_DATE);
+
+        // Get all the cardList where createdDate equals to UPDATED_CREATED_DATE
+        defaultCardShouldNotBeFound("createdDate.equals=" + UPDATED_CREATED_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCardsByCreatedDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        cardRepository.saveAndFlush(card);
+
+        // Get all the cardList where createdDate in DEFAULT_CREATED_DATE or UPDATED_CREATED_DATE
+        defaultCardShouldBeFound("createdDate.in=" + DEFAULT_CREATED_DATE + "," + UPDATED_CREATED_DATE);
+
+        // Get all the cardList where createdDate equals to UPDATED_CREATED_DATE
+        defaultCardShouldNotBeFound("createdDate.in=" + UPDATED_CREATED_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCardsByCreatedDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        cardRepository.saveAndFlush(card);
+
+        // Get all the cardList where createdDate is not null
+        defaultCardShouldBeFound("createdDate.specified=true");
+
+        // Get all the cardList where createdDate is null
+        defaultCardShouldNotBeFound("createdDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCardsByCreatedDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        cardRepository.saveAndFlush(card);
+
+        // Get all the cardList where createdDate greater than or equals to DEFAULT_CREATED_DATE
+        defaultCardShouldBeFound("createdDate.greaterOrEqualThan=" + DEFAULT_CREATED_DATE);
+
+        // Get all the cardList where createdDate greater than or equals to UPDATED_CREATED_DATE
+        defaultCardShouldNotBeFound("createdDate.greaterOrEqualThan=" + UPDATED_CREATED_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCardsByCreatedDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        cardRepository.saveAndFlush(card);
+
+        // Get all the cardList where createdDate less than or equals to DEFAULT_CREATED_DATE
+        defaultCardShouldNotBeFound("createdDate.lessThan=" + DEFAULT_CREATED_DATE);
+
+        // Get all the cardList where createdDate less than or equals to UPDATED_CREATED_DATE
+        defaultCardShouldBeFound("createdDate.lessThan=" + UPDATED_CREATED_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCardsByLostedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        cardRepository.saveAndFlush(card);
+
+        // Get all the cardList where losted equals to DEFAULT_LOSTED
+        defaultCardShouldBeFound("losted.equals=" + DEFAULT_LOSTED);
+
+        // Get all the cardList where losted equals to UPDATED_LOSTED
+        defaultCardShouldNotBeFound("losted.equals=" + UPDATED_LOSTED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCardsByLostedIsInShouldWork() throws Exception {
+        // Initialize the database
+        cardRepository.saveAndFlush(card);
+
+        // Get all the cardList where losted in DEFAULT_LOSTED or UPDATED_LOSTED
+        defaultCardShouldBeFound("losted.in=" + DEFAULT_LOSTED + "," + UPDATED_LOSTED);
+
+        // Get all the cardList where losted equals to UPDATED_LOSTED
+        defaultCardShouldNotBeFound("losted.in=" + UPDATED_LOSTED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCardsByLostedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        cardRepository.saveAndFlush(card);
+
+        // Get all the cardList where losted is not null
+        defaultCardShouldBeFound("losted.specified=true");
+
+        // Get all the cardList where losted is null
+        defaultCardShouldNotBeFound("losted.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCardsByActiveIsEqualToSomething() throws Exception {
+        // Initialize the database
+        cardRepository.saveAndFlush(card);
+
+        // Get all the cardList where active equals to DEFAULT_ACTIVE
+        defaultCardShouldBeFound("active.equals=" + DEFAULT_ACTIVE);
+
+        // Get all the cardList where active equals to UPDATED_ACTIVE
+        defaultCardShouldNotBeFound("active.equals=" + UPDATED_ACTIVE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCardsByActiveIsInShouldWork() throws Exception {
+        // Initialize the database
+        cardRepository.saveAndFlush(card);
+
+        // Get all the cardList where active in DEFAULT_ACTIVE or UPDATED_ACTIVE
+        defaultCardShouldBeFound("active.in=" + DEFAULT_ACTIVE + "," + UPDATED_ACTIVE);
+
+        // Get all the cardList where active equals to UPDATED_ACTIVE
+        defaultCardShouldNotBeFound("active.in=" + UPDATED_ACTIVE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCardsByActiveIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        cardRepository.saveAndFlush(card);
+
+        // Get all the cardList where active is not null
+        defaultCardShouldBeFound("active.specified=true");
+
+        // Get all the cardList where active is null
+        defaultCardShouldNotBeFound("active.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCardsByStudentIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Student student = StudentResourceIntTest.createEntity(em);
+        em.persist(student);
+        em.flush();
+        card.setStudent(student);
+        cardRepository.saveAndFlush(card);
+        Long studentId = student.getId();
+
+        // Get all the cardList where student equals to studentId
+        defaultCardShouldBeFound("studentId.equals=" + studentId);
+
+        // Get all the cardList where student equals to studentId + 1
+        defaultCardShouldNotBeFound("studentId.equals=" + (studentId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultCardShouldBeFound(String filter) throws Exception {
+        restCardMockMvc.perform(get("/api/cards?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(card.getId().intValue())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].losted").value(hasItem(DEFAULT_LOSTED.booleanValue())))
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
+
+        // Check, that the count call also returns 1
+        restCardMockMvc.perform(get("/api/cards/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultCardShouldNotBeFound(String filter) throws Exception {
+        restCardMockMvc.perform(get("/api/cards?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restCardMockMvc.perform(get("/api/cards/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional

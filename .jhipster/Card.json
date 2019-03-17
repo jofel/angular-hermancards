@@ -29,9 +29,9 @@
     "changelogDate": "20190316110443",
     "dto": "no",
     "searchEngine": false,
-    "service": "serviceImpl",
+    "service": "serviceClass",
     "entityTableName": "card",
     "databaseType": "sql",
-    "jpaMetamodelFiltering": false,
+    "jpaMetamodelFiltering": true,
     "pagination": "infinite-scroll"
 }

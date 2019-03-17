@@ -4,6 +4,8 @@ import hu.szeged.u.ohsh.service.CardService;
 import hu.szeged.u.ohsh.web.rest.errors.BadRequestAlertException;
 import hu.szeged.u.ohsh.web.rest.util.HeaderUtil;
 import hu.szeged.u.ohsh.web.rest.util.PaginationUtil;
+import hu.szeged.u.ohsh.service.dto.CardCriteria;
+import hu.szeged.u.ohsh.service.CardQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +35,11 @@ public class CardResource {
 
     private final CardService cardService;
 
-    public CardResource(CardService cardService) {
+    private final CardQueryService cardQueryService;
+
+    public CardResource(CardService cardService, CardQueryService cardQueryService) {
         this.cardService = cardService;
+        this.cardQueryService = cardQueryService;
     }
 
     /**
@@ -81,14 +86,27 @@ public class CardResource {
      * GET  /cards : get all the cards.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of cards in body
      */
     @GetMapping("/cards")
-    public ResponseEntity<List<Card>> getAllCards(Pageable pageable) {
-        log.debug("REST request to get a page of Cards");
-        Page<Card> page = cardService.findAll(pageable);
+    public ResponseEntity<List<Card>> getAllCards(CardCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Cards by criteria: {}", criteria);
+        Page<Card> page = cardQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cards");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * GET  /cards/count : count all the cards.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/cards/count")
+    public ResponseEntity<Long> countCards(CardCriteria criteria) {
+        log.debug("REST request to count Cards by criteria: {}", criteria);
+        return ResponseEntity.ok().body(cardQueryService.countByCriteria(criteria));
     }
 
     /**

@@ -4,6 +4,8 @@ import hu.szeged.u.ohsh.service.StudentService;
 import hu.szeged.u.ohsh.web.rest.errors.BadRequestAlertException;
 import hu.szeged.u.ohsh.web.rest.util.HeaderUtil;
 import hu.szeged.u.ohsh.web.rest.util.PaginationUtil;
+import hu.szeged.u.ohsh.service.dto.StudentCriteria;
+import hu.szeged.u.ohsh.service.StudentQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +35,11 @@ public class StudentResource {
 
     private final StudentService studentService;
 
-    public StudentResource(StudentService studentService) {
+    private final StudentQueryService studentQueryService;
+
+    public StudentResource(StudentService studentService, StudentQueryService studentQueryService) {
         this.studentService = studentService;
+        this.studentQueryService = studentQueryService;
     }
 
     /**
@@ -81,14 +86,27 @@ public class StudentResource {
      * GET  /students : get all the students.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of students in body
      */
     @GetMapping("/students")
-    public ResponseEntity<List<Student>> getAllStudents(Pageable pageable) {
-        log.debug("REST request to get a page of Students");
-        Page<Student> page = studentService.findAll(pageable);
+    public ResponseEntity<List<Student>> getAllStudents(StudentCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Students by criteria: {}", criteria);
+        Page<Student> page = studentQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/students");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * GET  /students/count : count all the students.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/students/count")
+    public ResponseEntity<Long> countStudents(StudentCriteria criteria) {
+        log.debug("REST request to count Students by criteria: {}", criteria);
+        return ResponseEntity.ok().body(studentQueryService.countByCriteria(criteria));
     }
 
     /**

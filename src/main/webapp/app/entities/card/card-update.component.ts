@@ -34,7 +34,7 @@ export class CardUpdateComponent implements OnInit {
             this.card = card;
         });
         this.studentService
-            .query({ filter: 'card-is-null' })
+            .query({ 'cardId.specified': 'false' })
             .pipe(
                 filter((mayBeOk: HttpResponse<IStudent[]>) => mayBeOk.ok),
                 map((response: HttpResponse<IStudent[]>) => response.body)

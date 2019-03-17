@@ -1,16 +1,31 @@
 package hu.szeged.u.ohsh.service;
 
 import hu.szeged.u.ohsh.domain.Card;
+import hu.szeged.u.ohsh.repository.CardRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 /**
- * Service Interface for managing Card.
+ * Service Implementation for managing Card.
  */
-public interface CardService {
+@Service
+@Transactional
+public class CardService {
+
+    private final Logger log = LoggerFactory.getLogger(CardService.class);
+
+    private final CardRepository cardRepository;
+
+    public CardService(CardRepository cardRepository) {
+        this.cardRepository = cardRepository;
+    }
 
     /**
      * Save a card.
@@ -18,7 +33,10 @@ public interface CardService {
      * @param card the entity to save
      * @return the persisted entity
      */
-    Card save(Card card);
+    public Card save(Card card) {
+        log.debug("Request to save Card : {}", card);
+        return cardRepository.save(card);
+    }
 
     /**
      * Get all the cards.
@@ -26,21 +44,32 @@ public interface CardService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<Card> findAll(Pageable pageable);
+    @Transactional(readOnly = true)
+    public Page<Card> findAll(Pageable pageable) {
+        log.debug("Request to get all Cards");
+        return cardRepository.findAll(pageable);
+    }
 
 
     /**
-     * Get the "id" card.
+     * Get one card by id.
      *
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<Card> findOne(Long id);
+    @Transactional(readOnly = true)
+    public Optional<Card> findOne(Long id) {
+        log.debug("Request to get Card : {}", id);
+        return cardRepository.findById(id);
+    }
 
     /**
-     * Delete the "id" card.
+     * Delete the card by id.
      *
      * @param id the id of the entity
      */
-    void delete(Long id);
+    public void delete(Long id) {
+        log.debug("Request to delete Card : {}", id);
+        cardRepository.deleteById(id);
+    }
 }
