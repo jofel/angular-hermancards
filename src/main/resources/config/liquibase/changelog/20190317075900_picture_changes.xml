@@ -18,16 +18,6 @@
         20190317075900_picture_changes
     -->
     <changeSet id="20190317075900-1" author="fodorj">
-        <addColumn
-            schemaName="public"
-            tableName="card">
-            <column name="active" type="boolean"/>
-        </addColumn>
-
-        <dropColumn
-            schemaName="public"
-            tableName="card"
-            columnName="image"/>
 
         <addColumn
             schemaName="public"
